@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-livenessprob
+  namespace: demo
+  labels:
+    demo: "true"
+spec:
+  containers:
+    - name: demo
+      image: gcr.io/daring-sunset-384809/demo:v1.0.0
+      ports:
+        - containerPort: 8080
+      livenessProbe:
+        httpGet:
+          path: /
+          port: 8080
+        initialDelaySeconds: 5
+        periodSeconds: 10

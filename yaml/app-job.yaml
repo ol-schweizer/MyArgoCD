@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: app-job-rsync
+spec:
+  template:
+    spec:
+      containers:
+      - name: app-job-rsync
+        image: gcr.io/daring-sunset-384809/demo:v1.0.0
+        command: ["gsutil", "-m", "rsync", "-dr", "gs://glow-sportradar/", "/data/input"]
+      restartPolicy: Never
+  backoffLimit: 4
